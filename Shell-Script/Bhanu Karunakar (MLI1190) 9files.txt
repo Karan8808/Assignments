@@ -1,0 +1,304 @@
+1.Write a shell script that deletes all lines containing a specified word in one or more files supplied as arguments to it?
+A)
+#!/bin/bash
+read -p "filename: " file   #give file name that you want to delete the word
+echo give word     #give the word
+read -p "line with word you want to delete: " word
+echo full file with $word line:     
+echo -e
+cat $file   #full file before deleting
+echo -e
+echo removing line with $word ....
+echo -e
+grep -v $word $file > test  #deleting word 
+mv test $file
+echo -e
+echo finall O/p---
+echo
+cat $file #finall O/p
+
+#######OutPut###################
+bhanu@ubuntu:~/Desktop/Bhanu$ bash last.sh 
+filename: spare
+give word
+line with word you want to delete: Tell
+full file with Tell line:
+
+Decide on your company profile design.
+Tell your story & be authentic.
+Write your company's history.
+Describe the products and services you offer.
+
+removing line with Tell
+
+
+finall O/p---
+
+Decide on your company profile design.
+Write your company's history.
+Describe the products and services you offer.
+---------------------------------------------------------------------------------------------------------------------------
+2.Write a shell script to list all of the directory files in a directory?
+A)
+#!/bin/bash
+read -p "Path you want to go to: " path
+cd $path || "exit"
+read -p "give the directory name in that path: " dir
+if [ -d $dir ]
+then 
+    echo "give the directory name present in your path"
+    cd $dir
+    ls -la
+    else 
+    echo "enter correct name"
+fi
+
+#######OutPut###################
+bhanu@ubuntu:~/Desktop/Practice/Tasks-12th$ ./listdir.sh 
+Path you want to go to: /home/bhanu/Desktop/Practice
+give the directory name in that path: Tasks-12th
+give the directory name present in your path
+total 52
+drwxr-xr-x 3 root  root  4096 Feb 17 13:11 .
+drwxr-xr-x 3 root  root  4096 Feb 12 16:25 ..
+drwxr-xr-x 3 root  root  4096 Feb 12 17:49 bxxu
+-rwxr-xr-x 1 root  root   195 Feb 17 13:09 dxxx.sh
+-rwxr-xr-x 1 root  root   203 Feb 17 13:03 ixxxe.sh
+-rwxr-xr-x 1 root  root   270 Feb 18 21:17 lxxxxr.sh
+-rwxr-xr-x 1 bhanu bhanu  491 Feb 17 13:21 mxxl.sh
+-rwxr-xr-x 1 root  root   364 Feb 13 12:16 mxxxh.sh
+-rwxr-xr-x 1 root  root   174 Feb 12 18:18 oxxxxxrs.sh
+-rwxr-xr-x 1 bhanu bhanu  351 Feb 17 13:17 rexxxxxxd.sh
+-rw-r--r-- 1 root  root   267 Feb 12 23:03 sxxxxxxt
+-rw-r--r-- 1 root  root   266 Feb 12 23:04 sxxxxt-2
+-rwxr-xr-x 1 bhanu bhanu  571 Feb 17 13:10 txxxxt.sh
+###############Wrong-I/P##########
+bhanu@ubuntu:~/Desktop/Practice/Tasks-12th$ ./listdir.sh 
+Path you want to go to: home/bhanu/Desktop/
+./listdir.sh: line 4: cd: home/bhanu/Desktop/: No such file or directory
+
+---------------------------------------------------------------------------------------------------------------------------
+3.Monitoring Disk Space utilization and Send Email Alert using script?
+A)
+#!/bin/bash
+
+THRESHOLD=25 #disc percentage
+#mailto=pbkn18@gmail.com
+#alert=pbkn18@gmail.com
+
+DISK_USAGE=$( df -h | awk ' NR==3 { print $5 } ')
+
+#echo $DISK_USAGE
+echo "${DISK_USAGE%\%}"
+d=${DISK_USAGE%\%}
+if [ $d -gt $THRESHOLD ]
+then
+  echo "Disk usage is high: $d"
+  mailto=pbkn18@gmail.com
+fi
+--------------------------------------------------------------------------------------------------------------------------
+4.Write a simple script to install any tomcat server?
+#! /bin/bash
+read -p "Give your required tomcat version:" req_tom_ver
+tom_m_v=$(echo $req_tom_ver|cut -c 1)
+url="https://archive.apache.org/dist/tomcat/tomcat-${tom_m_v}/v${req_tom_ver}/bin/apache-tomcat-${req_tom_ver}.tar.gz"
+wget $url
+tar -xvzf apache-tomcat-${req_tom_ver}.tar.gz
+mv apache-tomcat-${req_tom_ver} tomcat${tom_m_v}
+echo "type delete to delete your tomcat"
+read delete
+if [ $delete == "delete" ]
+ then 
+    rm -rf apache-tomcat-${req_tom_ver}.tar.gz
+    echo "deleted successfully"
+else
+ echo "tomcat present"
+fi  
+######################out-put####################
+bhanu@ubuntu:~/Desktop$ ./gg.sh 
+Give your required tomcat version:8.5.85
+--2023-02-19 14:58:07--  https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.85/bin/apache-tomcat-8.5.85.tar.gz
+Resolving archive.apache.org (archive.apache.org)... 138.201.131.134
+Connecting to archive.apache.org (archive.apache.org)|138.201.131.134|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 10633461 (10M) [application/x-gzip]
+Saving to: ‘apache-tomcat-8.5.85.tar.gz’
+
+apache-tomcat-8.5.85.tar.gz                    100%[===================================================================================================>]  10.14M  85.9KB/s    in 1m 52s  
+
+2023-02-19 15:00:00 (92.5 KB/s) - ‘apache-tomcat-8.5.85.tar.gz’ saved [10633461/10633461]
+-----------------------------------------------------------------------------------------------------------------------
+5.write a shell script using arithmetic operators for adding, multiplication and subtraction of any two numbers?
+A)
+#! /bin/bash
+echo "Artematic Operations"
+echo "enter values"
+read -p "give your First value:" num1
+read -p "give your Second value:" num2
+c=`expr $num1 + $num2`
+d=`expr $num1 - $num2`
+e=`expr $num1 \* $num2`
+echo "By adding of given two values -" $c
+echo "By subracting given two values -" $d
+echo "By multiplying two values-" $e
+
+#########out-put#######
+bhanu@ubuntu:~/Desktop/Practice/Tasks-12th$ ./operators.sh 
+Artematic Operations
+enter values
+give your First value:10
+give your Second value:5
+By adding of given two values - 15
+By subracting given two values - 5
+By multiplying two values- 50
+------------------------------------------------------------------------------------------------------------------------
+6.This example script prompts the user to enter a month and outputs the number of days. There are three possible answers: 30 days, 31 days, 28 or 29 days for February.
+#!/bin/bash 
+echo "Enter the name of a month." 
+read month
+case $month in
+  Feb )
+echo "There are 28/29 days in $month.";;
+  Apr | Jun | Sept | Nov )
+echo "There are 30 days in $month.";;
+  Jan | Mar | May | July | Aug | Oct | Dec )
+echo "There are 31 days in $month.";;
+  *)
+echo "Unknown month. Please check if you entered the correct month name or not: $month";;
+esac
+
+###################OutPut#############
+bhanu@ubuntu:~/Desktop/Practice/Tasks-12th$ ./month.sh 
+Enter the name of a month.
+Feb
+There are 28/29 days in Feb.
+bhanu@ubuntu:~/Desktop/Practice/Tasks-12th$ ./month.sh 
+Enter the name of a month.
+Jan
+There are 31 days in Jan.
+
+#########wrong-input########
+bhanu@ubuntu:~/Desktop/Bhanu$ ./month.sh 
+Enter the name of a month.
+iubv
+Unknown month. Please check if you entered the correct month name: iubv
+--------------------------------------------------------------------------------------------------------------------
+8.How will you debug a script if you have made any mistakes in a already written script?
+A)
+#!/bin/bash
+read filename
+set -x
+echo "give the file name present in your dir" 
+if [ -e "$filename" ]
+then
+  echo "The file $filename exists."
+else
+  echo "The file $filename does not exist."
+fi
+-------------------------------------------------------------------------------------------------------------------
+9.Script for iterations if-else, for, etc.,?
+A)
+#!/bin/bash
+echo "press 1 if you want integers a for abcd"
+read name
+if [ $name == "1" ]
+then 
+    echo "1 2 3 4 5 "
+elif [ $name == "a" ]
+then   
+    echo "a b c d e"
+else 
+    echo "not mentioned"
+fi
+################Out-Put########################
+bhanu@ubuntu:~/Desktop/Bhanu$ ./spare 
+press 1 if you want integers a for abcd
+1
+1 2 3 4 5 
+bhanu@ubuntu:~/Desktop/Bhanu$ ./spare 
+press 1 if you want integers a for abcd
+a
+a b c d e
+bhanu@ubuntu:~/Desktop/Bhanu$ ./spare 
+press 1 if you want integers a for abcd
+uvt
+not mentioned
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------
+15/02/2023
+
+
+#!/bin/bash
+
+echo "Give your Directory path"
+read -p "Directory:" dir #Give your Directory name
+cd $dir
+exit 
+echo Give your filename present in that dir
+read -p "file:" filename #Give your filename present in that dir
+if [ -f $filename ]
+then
+echo "$filename is present"
+else
+ echo "$filename is not present"
+ exit
+fi
+echo Give your age limits
+read -p "age_Start with :" age
+read -p "age_Ends with :" age_till
+echo -e 
+
+while [ $age -le $age_till ]
+do
+    b=$( cat $filename | grep -w $age )
+    echo $b
+    age=` expr $age + 1 `   
+done
+
+------------------------------------------------------------------------------------------------------------------------------------------
+16/02/2023
+
+#! /bin/bash
+read -p "Directory:" dir
+cd $dir
+#extension="${filename##*.}"
+#cp *.jpg *.mp4 *.mp3 media/
+
+if [ -d $dir ]
+then 
+    echo "directory present"  
+    mkdir backup
+else 
+    echo "wrong Dir"
+fi
+echo "give extension based on your files eg .sh or .pdf"
+read ext1
+fun() {
+    cp *$ext1 backup/
+}
+if [ -z "$(ls -A "$dir/backup")" ]
+    then
+        echo "directory is empty"
+        fun 
+        echo "files with $ext1 is moving to backup directory"
+    else 
+        echo "dir is not empty pres yes to override and no to exit" 
+        read a
+        if [ $a == "yes" ]
+        then 
+            rm -rf $dir/backup/*
+            fun
+            echo "overwritting files"
+        else 
+            exit 1
+        fi
+fi   
+--------------------------------------
+
+
+
+

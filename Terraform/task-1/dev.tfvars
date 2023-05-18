@@ -1,0 +1,18 @@
+
+/*instance_type = "t2.micro"
+ami = "ami-0f8ca728008ff5af4"
+key_name = "Practice"
+*/
+#access_key = "AKIAUEAO5I6HLY4N6LMA"
+#secret_key = "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"
+cidr_block = "10.0.0.0/16"
+vpc_name = "new-vpc"
+cidr_block_pub = "10.0.10.0/24"
+subnet_public = "public_subnet"
+cidr_block_private = "10.0.1.0/24"
+subnet_private = "private_subnet"
+Internet_gateway_name = "New-IGW"
+instance_type = "t2.large"
+ami = "ami-0f8ca728008ff5af4"
+key_name = "Docker"
+instance_name = "qa-instance"

@@ -1,0 +1,62 @@
+1) Write a shell script to get current date, time, user name and current working directory?
+#!/bin/bash 
+echo "Current date is `date`"
+echo "User is `whoami`"
+echo "Current directory `pwd`"
+
+
+############Out-Put######
+root@ubuntu:/home/bhanu/Desktop# bash bkp 
+Current date is Tuesday 21 February 2023 07:18:41 PM IST
+User is root
+Current directory /home/bhanu/Desktop
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2) Write a Shell Script that adds two numbers if provided as the command Line Argument and if the two numbers are not entered it outputs an Error Message along with a one-Line of how-to use description.
+#!/bin/bash
+a=$1 
+b=$2
+c=$3
+if [ $# -ne "3" ];
+then
+echo "Invalid input."
+echo "Please provide two numbers."
+else
+echo "Sum of two numbers is `expr $a + $b + $3`."
+fi
+
+##########Out-Put################
+root@ubuntu:/home/bhanu/Desktop/Bhanu/Debug-Scripts-main# bash Debug3.sh  10 20 30
+Sum of two numbers is 60.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3) You needs to print a given Number say 10572, in reverse order using a Shell script such that the input is provided using command Line Argument only.If the input data is not provided as Command Line Argument, it should throw and error and should suggest, how to use the script. Write the script but before that tell me the algorithm that needs to be implemented here
+#!/bin/bash
+echo enter n
+read n
+num=0
+while [ $n -gt 0 ]
+do
+num=$(expr $num \* 10)
+k=$(expr $n % 10)
+num=$(expr $num + $k)
+n=$(expr $n / 10)
+done
+echo number is $num
+##########Out-Put#############################
+root@ubuntu:/home/bhanu/Desktop/Bhanu/Debug-Scripts-main# bash Debug3.sh 
+enter n
+123456
+number is 654321
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4)You are supposed to calculate a real number calculation directly from terminal and not any shell script. What will you do (say the real numbers are 7.56 and 2.453)?
+
+root@ubuntu:/home/bhanu/Desktop/Bhanu/Debug-Scripts-main# echo 7.55+11.85 | bc
+OutPut:19.40
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+5) You are supposed to find the value of pi upto 100 places of decimal, what is the easiest way to get the result done.
+
+echo "scale=100; 4*a(1)" | bc -l
+
+OutPut:3.141592653589793238462643383279502884197169399375105820974944592307\
+8164062862089986280348253421170676
